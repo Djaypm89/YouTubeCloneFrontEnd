@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Component } from 'react';
+import SearchBar from "./Components/SearchNavBar/SearchBar";
 
 
 class App extends Component {
@@ -15,8 +16,9 @@ componentDidMount() {
 }
 
 async getVideos() {
+
     try{
-      let response = await axios.get("https://www.googleapis.com/youtube/v3/search?q=funnycatvideo&key=AIzaSyAqVUDwxJvO3FAr4YY49EUZiyIflyfiWWg");
+      let response = await axios.get("https://www.googleapis.com/youtube/v3/search?q={SEARCH QUERY HERE}&key={API KEY HERE} ");
     //   let response = await axios.get("localhost: 3001");
       console.log(response)
 
@@ -30,7 +32,7 @@ async getVideos() {
   render() {
       return (
         <div>
-          Hello World
+          <SearchBar />
         </div>
       )};
 
@@ -40,3 +42,6 @@ async getVideos() {
 
 
 export default App;
+
+
+//https://www.googleapis.com/youtube/v3/search?q={SEARCH QUERY HERE}&key={API KEY HERE} 
