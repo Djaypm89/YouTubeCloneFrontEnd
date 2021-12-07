@@ -11,5 +11,4 @@ const VideoPlayer = (props) => {
             frameborder="0" />)
 }
 
-// use iframe
 export default VideoPlayer;
