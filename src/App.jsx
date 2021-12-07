@@ -7,12 +7,19 @@ import SearchBar from "./Components/SearchNavBar/SearchBar";
 class App extends Component {
     constructor (props){
         super(props);
+        this.state = {
+            searchCriteria: ""
+        }
 
     }
 
 
 componentDidMount() {
     this.getVideos();
+}
+
+handleSubmit = (criteria) => {
+    this.setState({searchCriteria: criteria});
 }
 
 async getVideos() {
@@ -32,7 +39,7 @@ async getVideos() {
   render() {
       return (
         <div>
-          <SearchBar />
+          <SearchBar handleSubmit={this.handleSubmit} />
         </div>
       )};
 
