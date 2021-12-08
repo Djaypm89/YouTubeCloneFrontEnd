@@ -3,12 +3,15 @@ import axios from "axios";
 import SearchBar from "./Components/SearchNavBar/SearchBar";
 import apiKey from "./ApiKey";
 import VideoPlayer from "./Components/VideoPlayer/VideoPlayer";
+import RelatedVideos from "./Components/RelatedVideos/RelatedVideos";
 
 const App = (props) => {
   const [searchCriteria, setSearchCriteria] = useState("");
-  const [saveSearch, setSaveSearch] = useState([]);
+  const [mainVideo, setMainVideo] = useState([]);
+  const [relatedVideos, setRelatedVideo] = useState([]);
 
-  useEffect(() => {getVideos()}, [searchCriteria]) 
+  useEffect(() => {getVideos()}, [searchCriteria])
+  useEffect(() => {getRelatedVideos()},[mainVideo]);
 
   const handleSubmit = (criteria) => {
     setSearchCriteria(criteria);
@@ -18,17 +21,27 @@ const App = (props) => {
 
     try{
       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchCriteria}&key=${apiKey}`);
-      console.log(response.data.items[0].id.videoId)
-      setSaveSearch(response.data.items[0].id) 
+      setMainVideo(response.data.items[0].id) 
     }catch (error) {
       console.log("API request error");
     }
-  } 
+  }
+  
+  const getRelatedVideos = async () => {
+    try {
+      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${mainVideo.videoId}&type=video&key=${apiKey}`);
+      console.log(response.data.items);
+      setRelatedVideo(response.data.items);
+    } catch (error) {
+      console.log("Related Videos Error!");
+    }
+  }
 
   return (
     <div>
       <SearchBar handleSubmit={handleSubmit} />
-      <VideoPlayer video={saveSearch} />
+      <VideoPlayer video={mainVideo} />
+      <RelatedVideos relatedVideos={relatedVideos} />
     </div>
   );
  
