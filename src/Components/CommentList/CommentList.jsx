@@ -6,9 +6,15 @@ import React from "react";
 
 const CommentList = (props) => {
     return (
-        <nav>
-
-        </nav>
+        <div>
+            {props.displayedComments.map((comments) => {
+                return (
+                    <h3>
+                        {comments.commentBody}
+                    </h3>
+                );
+            })}
+        </div>
     );
 } 
 

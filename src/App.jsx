@@ -5,17 +5,20 @@ import apiKey from "./ApiKey";
 import VideoPlayer from "./Components/VideoPlayer/VideoPlayer";
 import RelatedVideos from "./Components/RelatedVideos/RelatedVideos";
 import Comment from "./Components/Comment/Comment";
-// import { CorsRequest } from "cors";
+import CommentList from "./Components/CommentList/CommentList";
+
 
 const App = (props) => {
   const [searchCriteria, setSearchCriteria] = useState("");
   const [mainVideo, setMainVideo] = useState([]);
   const [relatedVideos, setRelatedVideo] = useState([]);
   const [comment, setComment] = useState("");
+  const [displayedComments, setDisplayedComments] = useState([]);
 
-  useEffect(() => {getVideos()}, [searchCriteria])
+  useEffect(() => {getVideos()}, [searchCriteria]);
   useEffect(() => {getRelatedVideos()},[mainVideo]);
   useEffect(() => {postComment()},[comment]);
+  useEffect(() => {getRelatedComments()},[mainVideo]);
 
   const handleSubmit = (criteria) => {
     setSearchCriteria(criteria);
@@ -55,12 +58,22 @@ const App = (props) => {
       }
   }
 
+  const getRelatedComments = async () => {
+      try {
+          let response = await axios.get(`http://localhost:5000/api/comments/${mainVideo.videoId}`);
+          setDisplayedComments(response);
+      } catch (error) {
+          console.log("Comments not able to be displayed");
+      }
+  }
+
   return (
     <div>
       <SearchBar handleSubmit={handleSubmit} />
       <VideoPlayer video={mainVideo} />
       <RelatedVideos relatedVideos={relatedVideos} />
       <Comment handleComment={handleComment}/>
+      <CommentList displayedComments={displayedComments}/>
     </div>
   );
  
