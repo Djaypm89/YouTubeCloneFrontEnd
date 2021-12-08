@@ -5,6 +5,7 @@ import apiKey from "./ApiKey";
 import VideoPlayer from "./Components/VideoPlayer/VideoPlayer";
 import RelatedVideos from "./Components/RelatedVideos/RelatedVideos";
 import Comment from "./Components/Comment/Comment";
+// import { CorsRequest } from "cors";
 
 const App = (props) => {
   const [searchCriteria, setSearchCriteria] = useState("");
@@ -14,6 +15,7 @@ const App = (props) => {
 
   useEffect(() => {getVideos()}, [searchCriteria])
   useEffect(() => {getRelatedVideos()},[mainVideo]);
+  useEffect(() => {postComment()},[comment]);
 
   const handleSubmit = (criteria) => {
     setSearchCriteria(criteria);
@@ -42,6 +44,15 @@ const App = (props) => {
     } catch (error) {
       console.log("Related Videos Error!");
     }
+  }
+
+  const postComment = async () => {
+      try {
+          let response = await axios.post('http://localhost:5000/api/comments', { videoId: mainVideo.videoId, commentBody: comment });
+          console.log(response);
+      } catch (error) {
+          console.log("Comment Error!");
+      }
   }
 
   return (
