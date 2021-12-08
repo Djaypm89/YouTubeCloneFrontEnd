@@ -4,17 +4,24 @@ import SearchBar from "./Components/SearchNavBar/SearchBar";
 import apiKey from "./ApiKey";
 import VideoPlayer from "./Components/VideoPlayer/VideoPlayer";
 import RelatedVideos from "./Components/RelatedVideos/RelatedVideos";
+import Comment from "./Components/Comment/Comment";
 
 const App = (props) => {
   const [searchCriteria, setSearchCriteria] = useState("");
   const [mainVideo, setMainVideo] = useState([]);
   const [relatedVideos, setRelatedVideo] = useState([]);
+  const [comment, setComment] = useState("");
 
   useEffect(() => {getVideos()}, [searchCriteria])
   useEffect(() => {getRelatedVideos()},[mainVideo]);
 
   const handleSubmit = (criteria) => {
     setSearchCriteria(criteria);
+  }
+
+  const handleComment = (userComment) => {
+    console.log("Comment Successs!");
+    setComment(userComment);
   }
 
   const getVideos = async () => {
@@ -42,6 +49,7 @@ const App = (props) => {
       <SearchBar handleSubmit={handleSubmit} />
       <VideoPlayer video={mainVideo} />
       <RelatedVideos relatedVideos={relatedVideos} />
+      <Comment handleComment={handleComment}/>
     </div>
   );
  
