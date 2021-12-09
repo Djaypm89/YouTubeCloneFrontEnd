@@ -7,7 +7,6 @@ import Reply from "../Reply/Reply";
 
 const CommentList = (props) => {
 
-        console.log(props.displayedComments);
         return (
             <div>
                 {props.displayedComments.map((comments) => {
@@ -15,6 +14,13 @@ const CommentList = (props) => {
                         <h3 key={comments._id}>
                             {comments.commentBody}
                             <Reply commentId={comments._id} handleReply={props.handleReply} />
+                            {comments.replies.map((reply) => {
+                                return (
+                                    <h4>
+                                        {reply.replyBody}
+                                    </h4>
+                                );
+                            })}
                         </h3>
                     );
                 })}

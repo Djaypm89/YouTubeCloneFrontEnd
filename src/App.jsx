@@ -15,7 +15,7 @@ const App = (props) => {
 
   //STATE:
   const [searchCriteria, setSearchCriteria] = useState("");
-  const [mainVideo, setMainVideo] = useState([]);
+  const [mainVideo, setMainVideo] = useState(null);
   const [relatedVideos, setRelatedVideo] = useState([]);
   const [comment, setComment] = useState("");
   const [displayedComments, setDisplayedComments] = useState([]);
@@ -48,8 +48,8 @@ const App = (props) => {
   const getVideos = async () => {
 
     try{
-      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchCriteria}&key=${apiKey}`);
-      setMainVideo(response.data.items[0].id) 
+      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchCriteria}&key=${apiKey}&part=snippet&type=video`);
+      setMainVideo(response.data.items[0]) 
     }catch (error) {
       console.log("Couldn't Receive Videos from Youtube API!");
     }
@@ -58,7 +58,7 @@ const App = (props) => {
   //GETS RELATED VIDEOS WITH SELECTED VIDEO ID:
   const getRelatedVideos = async () => {
     try {
-      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${mainVideo.videoId}&type=video&key=${apiKey}`);
+      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${mainVideo.id.videoId}&type=video&key=${apiKey}`);
       setRelatedVideo(response.data.items);
     } catch (error) {
       console.log("Couldn't Receive Related Videos!");
@@ -68,7 +68,7 @@ const App = (props) => {
   //SAVES COMMENT TO DATABASE:
   const postComment = async () => {
       try {
-          let response = await axios.post('http://localhost:5000/api/comments', { videoId: mainVideo.videoId, commentBody: comment });
+          let response = await axios.post('http://localhost:5000/api/comments', { videoId: mainVideo.id.videoId, commentBody: comment });
       } catch (error) {
           console.log("Couldn't POST Comment to Database!");
       }
@@ -86,7 +86,7 @@ const App = (props) => {
   //GETS COMMENTS AND REPLIES FOR SELECTED VIDEO:
   const getRelatedComments = async () => {
       try {
-          let response = await axios.get(`http://localhost:5000/api/comments/${mainVideo.videoId}`);
+          let response = await axios.get(`http://localhost:5000/api/comments/${mainVideo.id.videoId}`);
           setDisplayedComments(response.data);
       } catch (error) {
           console.log("Couldn't Load Comments from Database!");
@@ -97,7 +97,7 @@ const App = (props) => {
   return (
     <div>
       <SearchBar handleSubmit={handleSubmit} />
-      <VideoPlayer video={mainVideo} />
+      {mainVideo && <VideoPlayer video={mainVideo} />}
       <RelatedVideos relatedVideos={relatedVideos} />
       <Comment handleComment={handleComment} />
       <CommentList displayedComments={displayedComments} handleReply={handleReply}/>

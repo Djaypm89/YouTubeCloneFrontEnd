@@ -1,14 +1,20 @@
 import React from 'react'
 const VideoPlayer = (props) => {
+    console.log(props.video.id.videoId);
+    const videoId = props.video.id.videoId;
     return(
-        <iframe 
+        <div>
+            <iframe 
             id="ytplayer" 
             type="text/html" 
             width="640" 
             height="360"
-            title={props.video.videoId}
-            src={`https://www.youtube.com/embed/${props.video.videoId}?autoplay=1&origin=http://example.com`}
-            frameborder="0" />)
+            src={`https://www.youtube.com/embed/${videoId}`}
+            frameborder="0" />
+            <h3>{props.video.snippet.title}</h3>
+            <h4>{props.video.snippet.description}</h4>
+        </div>
+    );
 }
 
 export default VideoPlayer;
