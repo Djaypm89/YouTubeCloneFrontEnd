@@ -14,11 +14,14 @@ const App = (props) => {
   const [relatedVideos, setRelatedVideo] = useState([]);
   const [comment, setComment] = useState("");
   const [displayedComments, setDisplayedComments] = useState([]);
+  const [reply, setReply] = useState("");
+  const [commentId, setCommentId] = useState("");
 
   useEffect(() => {getVideos()}, [searchCriteria]);
   useEffect(() => {getRelatedVideos()},[mainVideo]);
   useEffect(() => {postComment()},[comment]);
   useEffect(() => {getRelatedComments()},[mainVideo]);
+  useEffect(() => {postReply()}, [reply]);
 
   const handleSubmit = (criteria) => {
     setSearchCriteria(criteria);
@@ -26,6 +29,11 @@ const App = (props) => {
 
   const handleComment = (userComment) => {
     setComment(userComment);
+  }
+
+  const handleReply = (userReply, commentId) => {
+    setReply(userReply);
+    setCommentId(commentId);
   }
 
   const getVideos = async () => {
@@ -55,6 +63,14 @@ const App = (props) => {
       }
   }
 
+  const postReply = async () => {
+    try {
+      let response = await axios.post(`http://localhost:5000/api/comments/${commentId}/replies`, { replyBody: reply });
+    } catch (error) {
+      console.log("Couldn't POST Reply to Database!");
+    }
+  }
+
   const getRelatedComments = async () => {
       try {
           let response = await axios.get(`http://localhost:5000/api/comments/${mainVideo.videoId}`);
@@ -69,8 +85,8 @@ const App = (props) => {
       <SearchBar handleSubmit={handleSubmit} />
       <VideoPlayer video={mainVideo} />
       <RelatedVideos relatedVideos={relatedVideos} />
-      <Comment handleComment={handleComment}/>
-      <CommentList displayedComments={displayedComments}/>
+      <Comment handleComment={handleComment} />
+      <CommentList displayedComments={displayedComments} handleReply={handleReply}/>
     </div>
   );
  
