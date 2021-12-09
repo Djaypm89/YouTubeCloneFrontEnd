@@ -1,8 +1,9 @@
 import React from "react";
+import "./RelatedVideos.css";
 
 const RelatedVideos = (props) => {
     return(
-        <div>
+        <div className="rel-vid">
             {props.relatedVideos.map((videos) => {
                 return (
                     <iframe 

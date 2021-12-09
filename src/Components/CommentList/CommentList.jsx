@@ -4,11 +4,12 @@
 
 import React from "react";
 import Reply from "../Reply/Reply";
+import "./CommentList.css";
 
 const CommentList = (props) => {
 
         return (
-            <div>
+            <div className="comment-cont">
                 {props.displayedComments.map((comments) => {
                     return (
                         <h3 key={comments._id}>
@@ -16,7 +17,7 @@ const CommentList = (props) => {
                             <Reply commentId={comments._id} handleReply={props.handleReply} />
                             {comments.replies.map((reply) => {
                                 return (
-                                    <h4>
+                                    <h4 className="reply">
                                         {reply.replyBody}
                                     </h4>
                                 );

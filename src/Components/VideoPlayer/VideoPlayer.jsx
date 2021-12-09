@@ -1,9 +1,10 @@
 import React from 'react'
+import "./VideoPlayer.css";
 const VideoPlayer = (props) => {
     console.log(props.video.id.videoId);
     const videoId = props.video.id.videoId;
     return(
-        <div>
+        <div className="video-player">
             <iframe 
             id="ytplayer" 
             type="text/html" 

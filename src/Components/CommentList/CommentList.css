@@ -1,0 +1,11 @@
+.comment-cont {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+.reply {
+    padding-left: 5vw;
+    padding-right: 5vw;
+}

@@ -1,0 +1,15 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: grey;
+    position: sticky;
+    top: 0;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.navbar form{
+    display: flex;
+    list-style: none;
+    margin: 20px 0px;
+}

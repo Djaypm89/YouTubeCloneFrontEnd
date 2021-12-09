@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./SearchBar.css";
 
 const SearchBar = (props) => {
     const [searchCriteria, setSearchCriteria] = useState("")
@@ -13,7 +14,8 @@ const SearchBar = (props) => {
     }
 
     return (
-        <nav>
+        <nav className="navbar">
+            <h1>Youtube Clone</h1>
             <form onSubmit={handleSubmit}>
                 <input onChange={handleChange} type="text"/>
                 <button type="submit">Search</button>               

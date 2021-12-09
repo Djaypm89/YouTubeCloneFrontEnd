@@ -1,0 +1,5 @@
+.rel-vid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

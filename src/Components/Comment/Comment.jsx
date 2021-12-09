@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Comment.css";
 
 const Comment = (props) => {
     const [comment, setComment] = useState("");
@@ -14,7 +15,7 @@ const Comment = (props) => {
     }
 
     return (
-        <div>
+        <div className="comment">
             <form onSubmit={handleComment}>
                 <input type="text" onChange={onChange}/>
                 <button type="submit">Submit</button>               

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import apiKey from "./ApiKey";
+import "./App.css";
 
 //COMPONENT IMPORTS:
 import SearchBar from "./Components/SearchNavBar/SearchBar";
@@ -41,6 +42,8 @@ const App = (props) => {
     setReply(userReply);
     setCommentId(commentId);
   }
+
+  
 
   //API CALLS///////////////////////////////////////////
 
@@ -95,10 +98,12 @@ const App = (props) => {
   //API CALL END//////////////////////////////////////////////////
 
   return (
-    <div>
+    <div className="div-container">
       <SearchBar handleSubmit={handleSubmit} />
-      {mainVideo && <VideoPlayer video={mainVideo} />}
-      <RelatedVideos relatedVideos={relatedVideos} />
+      <div className="video-container">
+        {mainVideo && <VideoPlayer video={mainVideo} />}
+        <RelatedVideos relatedVideos={relatedVideos} />
+      </div>
       <Comment handleComment={handleComment} />
       <CommentList displayedComments={displayedComments} handleReply={handleReply}/>
     </div>
