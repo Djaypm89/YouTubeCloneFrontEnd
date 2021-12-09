@@ -5,17 +5,23 @@
 import React from "react";
 
 const CommentList = (props) => {
-    return (
-        <div>
-            {props.displayedComments.map((comments) => {
-                return (
-                    <h3>
-                        {comments.commentBody}
-                    </h3>
-                );
-            })}
-        </div>
-    );
+
+        console.log(props.displayedComments);
+        return (
+            <div>
+                {props.displayedComments.map((comments) => {
+                    return (
+                        <h3>
+                            {comments.commentBody}
+                        </h3>
+                    );
+                })}
+            </div>
+        ); 
 } 
 
 export default CommentList;
+
+
+
+

@@ -1,8 +1,6 @@
 import React from "react";
 
 const RelatedVideos = (props) => {
-    console.log("From Related:");
-    console.log(props.relatedVideos);
     return(
         <div>
             {props.relatedVideos.map((videos) => {

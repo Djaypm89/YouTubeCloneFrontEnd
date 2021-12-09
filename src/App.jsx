@@ -25,7 +25,6 @@ const App = (props) => {
   }
 
   const handleComment = (userComment) => {
-    console.log("Comment Successs!");
     setComment(userComment);
   }
 
@@ -35,35 +34,33 @@ const App = (props) => {
       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchCriteria}&key=${apiKey}`);
       setMainVideo(response.data.items[0].id) 
     }catch (error) {
-      console.log("API request error");
+      console.log("Couldn't Receive Videos from Youtube API!");
     }
   }
   
   const getRelatedVideos = async () => {
     try {
       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${mainVideo.videoId}&type=video&key=${apiKey}`);
-      console.log(response.data.items);
       setRelatedVideo(response.data.items);
     } catch (error) {
-      console.log("Related Videos Error!");
+      console.log("Couldn't Receive Related Videos!");
     }
   }
 
   const postComment = async () => {
       try {
           let response = await axios.post('http://localhost:5000/api/comments', { videoId: mainVideo.videoId, commentBody: comment });
-          console.log(response);
       } catch (error) {
-          console.log("Comment Error!");
+          console.log("Couldn't POST Comment to Database!");
       }
   }
 
   const getRelatedComments = async () => {
       try {
           let response = await axios.get(`http://localhost:5000/api/comments/${mainVideo.videoId}`);
-          setDisplayedComments(response);
+          setDisplayedComments(response.data);
       } catch (error) {
-          console.log("Comments not able to be displayed");
+          console.log("Couldn't Load Comments from Database!");
       }
   }
 
