@@ -1,12 +1,12 @@
-// mongoose returns comments in array 
-// map over comment array to place each comment in its own div tag 
-// 
-
 import React from "react";
 import Reply from "../Reply/Reply";
 import "./CommentList.css";
 
 const CommentList = (props) => {
+
+    const handleLike = (event) => {
+        
+    }
 
         return (
             <div className="comment-cont">
@@ -14,6 +14,7 @@ const CommentList = (props) => {
                     return (
                         <h3 key={comments._id}>
                             {comments.commentBody}
+                            <button onClick={handleLike} value={comments.like}>Like</button>
                             <Reply commentId={comments._id} handleReply={props.handleReply} />
                             {comments.replies.map((reply) => {
                                 return (

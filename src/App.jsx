@@ -42,9 +42,7 @@ const App = (props) => {
     setReply(userReply);
     setCommentId(commentId);
   }
-
   
-
   //API CALLS///////////////////////////////////////////
 
   //GETS VIDEOS FROM YOUTUBE API:
