@@ -25,9 +25,9 @@ const App = (props) => {
 
   //USE EFFECT:
   useEffect(() => {getVideos()}, [searchCriteria]);
-  useEffect(() => {getRelatedVideos()},[mainVideo]);
-  useEffect(() => {postComment()},[comment]);
-  useEffect(() => {getRelatedComments()},[mainVideo]);
+  useEffect(() => {getRelatedVideos()}, [mainVideo]);
+  useEffect(() => {postComment()}, [comment]);
+  useEffect(() => {getRelatedComments()}, [mainVideo]);
   useEffect(() => {postReply()}, [reply]);
 
   const handleSubmit = (criteria) => {
