@@ -5,9 +5,9 @@ import "./CommentList.css";
 
 const CommentList = (props) => {
 
-   /*  const handleVote = (event) => {
+    const handleVote = (event) => {
         props.handleVote(event.target.id, event.target.value);
-    } */
+    }
 
     return (
         <div className="comment-cont">

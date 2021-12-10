@@ -17,7 +17,10 @@ const Comment = (props) => {
     return (
         <div className="comment">
             <form onSubmit={handleComment}>
-                <input type="text" onChange={onChange}/>
+                <label>
+                    Add Comment
+                    <input type="text" onChange={onChange}/>
+                </label>
                 <button type="submit">Submit</button>               
             </form>
         </div>

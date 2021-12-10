@@ -109,7 +109,6 @@ const App = (props) => {
       <CommentList 
         displayedComments={displayedComments} 
         handleReply={handleReply}
-        handleVote={handleVote}
       />
     </div>
   );

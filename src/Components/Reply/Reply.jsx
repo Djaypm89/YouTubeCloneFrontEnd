@@ -22,7 +22,10 @@ const Reply = (props) => {
 
     return(
         <form onSubmit={handleSubmit}>
-            <input type="text" onChange={handleChange}></input>
+            <label>
+                Reply to Comment
+                <input type="text" onChange={handleChange}></input>
+            </label>
             <button type="submit">Submit</button>
         </form>
     );
