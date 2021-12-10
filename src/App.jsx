@@ -29,15 +29,18 @@ const App = (props) => {
   useEffect(() => {postComment()}, [comment]);
   useEffect(() => {getRelatedComments()}, [mainVideo]);
   useEffect(() => {postReply()}, [reply]);
-
+  
+  //Handles the Submit from the SearchBar:
   const handleSubmit = (criteria) => {
     setSearchCriteria(criteria);
   }
 
+  //Handles the Submit from the Comment Text Input:
   const handleComment = (userComment) => {
     setComment(userComment);
   }
 
+  //Handles the Submit from the Reply Text Input:
   const handleReply = (userReply, commentId) => {
     setReply(userReply);
     setCommentId(commentId);
@@ -103,7 +106,11 @@ const App = (props) => {
         <RelatedVideos relatedVideos={relatedVideos} />
       </div>
       <Comment handleComment={handleComment} />
-      <CommentList displayedComments={displayedComments} handleReply={handleReply}/>
+      <CommentList 
+        displayedComments={displayedComments} 
+        handleReply={handleReply}
+        handleVote={handleVote}
+      />
     </div>
   );
  

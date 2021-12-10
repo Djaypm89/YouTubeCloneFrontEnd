@@ -1,4 +1,4 @@
-import "ReplyList.css";
+import "./ReplyList.css";
 
 const ReplyList = (props) => {
     return(
